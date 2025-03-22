@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego para Fani</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #fff8dc;
+        }
+        #puzzle-container, #riddle-container, #question-container, #final-message {
+            display: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenida al juego, Fani</h1>
+    <div id="start-container">
+        <button onclick="startPuzzle()">Comenzar</button>
+    </div>
+
+    <div id="puzzle-container">
+        <h2>Arma el rompecabezas</h2>
+        <p>Arrastra las piezas para completar la imagen</p>
+        <canvas id="puzzle" width="400" height="400"></canvas>
+        <button onclick="checkPuzzle()">Completado</button>
+    </div>
+
+    <div id="riddle-container">
+        <h2>¿Cuál es el nombre de la gatita de Fani?</h2>
+        <input type="text" id="riddle-answer" placeholder="Escribe aquí">
+        <button onclick="checkRiddle()">Responder</button>
+        <p id="riddle-feedback"></p>
+    </div>
+
+    <div id="question-container">
+        <h2>¿Qué es lo que más le dice Jonathan a Fani?</h2>
+        <input type="text" id="question-answer" placeholder="Escribe aquí">
+        <button onclick="checkQuestion()">Responder</button>
+        <p id="question-feedback"></p>
+    </div>
+
+    <div id="final-message">
+        <h2>25/03/2025</h2>
+    </div>
+
+    <script>
+        function startPuzzle() {
+            document.getElementById('start-container').style.display = 'none';
+            document.getElementById('puzzle-container').style.display = 'block';
+            // Aquí iría la lógica del rompecabezas
+        }
+
+        function checkPuzzle() {
+            document.getElementById('puzzle-container').style.display = 'none';
+            alert('25');
+            document.getElementById('riddle-container').style.display = 'block';
+        }
+
+        function checkRiddle() {
+            let answer = document.getElementById('riddle-answer').value.trim();
+            if (answer.toLowerCase() === 'kira') {
+                alert('03');
+                document.getElementById('riddle-container').style.display = 'none';
+                document.getElementById('question-container').style.display = 'block';
+            } else {
+                document.getElementById('riddle-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
+            }
+        }
+
+        function checkQuestion() {
+            let answer = document.getElementById('question-answer').value.trim();
+            if (answer === 'me caes mal') {
+                alert('2025');
+                document.getElementById('question-container').style.display = 'none';
+                document.getElementById('final-message').style.display = 'block';
+            } else {
+                document.getElementById('question-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
+            }
+        }
+    </script>
+</body>
+</html>
