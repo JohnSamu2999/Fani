@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             background-color: #fff8dc;
         }
-        #puzzle-container, #riddle-container, #question-container, #final-message {
+        #riddle-container, #question-container, #date-container, #final-message {
             display: none;
         }
         button {
@@ -32,9 +32,6 @@
             margin-right: 15px;
             font-family: Arial, sans-serif;
         }
-        canvas {
-            border: 1px solid black;
-        }
     </style>
 </head>
 <body>
@@ -43,29 +40,29 @@
         <a href="juego.html">Jueguito</a>
     </nav>
     
-    <h1>Bienvenida al juego Fani Fea <3 </h1>
+    <h1>Bienvenida al juego, Fani</h1>
     <div id="start-container">
         <p>Haz clic en el botón para comenzar el juego.</p>
         <button onclick="startGame()">Comenzar</button>
     </div>
 
     <div id="game-container" style="display: none;">
-        <div id="puzzle-container">
-            <h2>Arma el rompecabezas</h2>
-            <p>Arrastra las piezas para completar la imagen</p>
-            <canvas id="puzzle-canvas" width="400" height="400"></canvas>
-            <button onclick="checkPuzzle()">Completado</button>
+        <div id="date-container">
+            <h2>¿En qué día Fani y Jonathan empezaron a hablar más? "Como se esscribe: dd/mm/aaaa"</h2>
+            <input type="text" id="date-answer" placeholder="Escribe aquí">
+            <button onclick="checkDate()">Responder</button>
+            <p id="date-feedback"></p>
         </div>
 
         <div id="riddle-container">
-            <h2>¿Cuál es el nombre de la gatita de Fani? "Mayuscula al principio" </h2>
+            <h2>¿Cuál es el nombre de la gatita de Fani?</h2>
             <input type="text" id="riddle-answer" placeholder="Escribe aquí">
             <button onclick="checkRiddle()">Responder</button>
             <p id="riddle-feedback"></p>
         </div>
 
         <div id="question-container">
-            <h2>¿Qué es lo que más le dice Jonathan a Fani? "En minisculas"</h2>
+            <h2>¿Qué es lo que más le dice Jonathan a Fani?</h2>
             <input type="text" id="question-answer" placeholder="Escribe aquí">
             <button onclick="checkQuestion()">Responder</button>
             <p id="question-feedback"></p>
@@ -77,67 +74,21 @@
     </div>
 
     <script>
-        let canvas = document.getElementById('puzzle-canvas');
-        let ctx = canvas.getContext('2d');
-        let img = new Image();
-        let pieces = [];
-        let rows = 3, cols = 3; // Dividimos el rompecabezas en 3x3
-        let pieceWidth, pieceHeight;
-
-        img.src = 'puzzle.jpg';
-        img.onload = function() {
-            pieceWidth = img.width / cols;
-            pieceHeight = img.height / rows;
-
-            // Mezclamos las piezas
-            for (let y = 0; y < rows; y++) {
-                for (let x = 0; x < cols; x++) {
-                    pieces.push({ x, y });
-                }
-            }
-            pieces = pieces.sort(() => Math.random() - 0.5);
-
-            drawPuzzle();
-        };
-
-        img.onerror = function() {
-            alert('Error: No se pudo cargar la imagen del rompecabezas.');
-        };
-
-        function drawPuzzle() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            pieces.forEach((piece, index) => {
-                let sx = piece.x * pieceWidth;
-                let sy = piece.y * pieceHeight;
-                let dx = (index % cols) * pieceWidth;
-                let dy = Math.floor(index / cols) * pieceHeight;
-
-                ctx.drawImage(img, sx, sy, pieceWidth, pieceHeight, dx, dy, pieceWidth, pieceHeight);
-            });
-        }
-
-        function checkPuzzle() {
-            let correct = true;
-            pieces.forEach((piece, index) => {
-                let expectedX = index % cols;
-                let expectedY = Math.floor(index / cols);
-                if (piece.x !== expectedX || piece.y !== expectedY) {
-                    correct = false;
-                }
-            });
-
-            if (correct) {
-                alert('25');
-                document.getElementById('puzzle-container').style.display = 'none';
-                document.getElementById('riddle-container').style.display = 'block';
-            } else {
-                alert('El rompecabezas aún no está completo. Sigue intentándolo.');
-            }
-        }
-
         function startGame() {
             document.getElementById('start-container').style.display = 'none';
             document.getElementById('game-container').style.display = 'block';
+            document.getElementById('date-container').style.display = 'block';
+        }
+
+        function checkDate() {
+            let answer = document.getElementById('date-answer').value.trim();
+            if (answer === '25/12/2024') {
+                alert('25');
+                document.getElementById('date-container').style.display = 'none';
+                document.getElementById('riddle-container').style.display = 'block';
+            } else {
+                document.getElementById('date-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
+            }
         }
 
         function checkRiddle() {
@@ -162,8 +113,5 @@
             }
         }
     </script>
-</body>
-</html>
-
 </body>
 </html>
