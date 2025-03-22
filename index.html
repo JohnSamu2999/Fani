@@ -3,39 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Ti</title>
+    <title>Para Fani</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #fff8dc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-        .flower {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-        }
-        .flower img {
-            width: 100%;
-            height: 100%;
-        }
-        .message {
-            position: absolute;
             text-align: center;
-            font-size: 24px;
             font-family: Arial, sans-serif;
-            color: black; /* Texto en negro */
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 10;
-            max-width: 80%;
+            background-color: #fff8dc;
+        }
+        #puzzle-container, #riddle-container, #question-container, #final-message {
+            display: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
         }
         nav {
             position: absolute;
@@ -45,7 +27,7 @@
         }
         nav a {
             text-decoration: none;
-            color: black; /* Enlaces en negro */
+            color: black;
             font-size: 20px;
             margin-right: 15px;
             font-family: Arial, sans-serif;
@@ -54,38 +36,75 @@
 </head>
 <body>
     <nav>
-        <a href="#">Inicio</a>
-        <a href="#">Jueguito</a>
+        <a href="index.html">Inicio</a>
+        <a href="juego.html">Jueguito</a>
     </nav>
-    <div class="message">
-        Feliz día de las Flores Amarillas, se me hacía muy aburrido darte algo sencillo, así que vamos a hacerlo emocionante. <br>
-        Esto es una pequeña pista de lo que se viene y a la vez una excusa JAJAJAJ, ya que no te di nada, perooooo por el momento. <br>
-        Te preparé un jueguito que puedes abrir en la pestaña de arriba, el cual es una pequeña pista de lo que viene. <br>
-        Sin más que agregar, ¡te quiero muchooooo! <3 Y bueno, toca esperar a ver qué tengo en mis cartas, ¿verdad? Jijiji. <br>
-        Me caes mal, que disfrutes el jueguito, y perdón por no darte nada, pero me gusta hacerla de emoción. <3 Te quiero mucho. <br>
+    
+    <h1>Bienvenida al juego, Fani</h1>
+    <div id="start-container">
+        <button onclick="startPuzzle()">Comenzar</button>
     </div>
-    <script>
-        function createFlowers() {
-            const images = ["florecita.gif", "roja.gif"];
-            const totalFlowers = Math.floor(window.innerWidth * window.innerHeight / 2000);
 
-            for (let i = 0; i < totalFlowers; i++) {
-                let flower = document.createElement("div");
-                flower.classList.add("flower");
-                flower.style.left = Math.random() * (window.innerWidth - 50) + "px";
-                flower.style.top = Math.random() * (window.innerHeight - 50) + "px";
-                
-                let img = document.createElement("img");
-                img.src = images[Math.floor(Math.random() * images.length)];
-                img.alt = "Flor";
-                
-                flower.appendChild(img);
-                document.body.appendChild(flower);
+    <div id="puzzle-container">
+        <h2>Arma el rompecabezas</h2>
+        <p>Arrastra las piezas para completar la imagen</p>
+        <canvas id="puzzle" width="400" height="400"></canvas>
+        <button onclick="checkPuzzle()">Completado</button>
+    </div>
+
+    <div id="riddle-container">
+        <h2>¿Cuál es el nombre de la gatita de Fani?</h2>
+        <input type="text" id="riddle-answer" placeholder="Escribe aquí">
+        <button onclick="checkRiddle()">Responder</button>
+        <p id="riddle-feedback"></p>
+    </div>
+
+    <div id="question-container">
+        <h2>¿Qué es lo que más le dice Jonathan a Fani?</h2>
+        <input type="text" id="question-answer" placeholder="Escribe aquí">
+        <button onclick="checkQuestion()">Responder</button>
+        <p id="question-feedback"></p>
+    </div>
+
+    <div id="final-message">
+        <h2>25/03/2025</h2>
+    </div>
+
+    <script>
+        function startPuzzle() {
+            document.getElementById('start-container').style.display = 'none';
+            document.getElementById('puzzle-container').style.display = 'block';
+            // Aquí iría la lógica del rompecabezas
+        }
+
+        function checkPuzzle() {
+            document.getElementById('puzzle-container').style.display = 'none';
+            alert('25');
+            document.getElementById('riddle-container').style.display = 'block';
+        }
+
+        function checkRiddle() {
+            let answer = document.getElementById('riddle-answer').value.trim();
+            if (answer.toLowerCase() === 'kira') {
+                alert('03');
+                document.getElementById('riddle-container').style.display = 'none';
+                document.getElementById('question-container').style.display = 'block';
+            } else {
+                document.getElementById('riddle-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
             }
         }
-        window.onload = createFlowers;
+
+        function checkQuestion() {
+            let answer = document.getElementById('question-answer').value.trim();
+            if (answer === 'me caes mal') {
+                alert('2025');
+                document.getElementById('question-container').style.display = 'none';
+                document.getElementById('final-message').style.display = 'block';
+            } else {
+                document.getElementById('question-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
+            }
+        }
     </script>
 </body>
 </html>
-
 
