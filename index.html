@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Fani</title>
+    <title>Juego para Fani</title>
     <style>
         body {
             text-align: center;
@@ -40,41 +40,43 @@
         <a href="juego.html">Jueguito</a>
     </nav>
     
-    <h1>Bienvenida al juego, Fani</h1>
+    <h1>Bienvenida al juego Fani feaaa </h1>
     <div id="start-container">
-        <button onclick="startPuzzle()">Comenzar</button>
+        <p>Haz clic en el botón para comenzar el juego.</p>
+        <button onclick="startGame()">Comenzar</button>
     </div>
 
-    <div id="puzzle-container">
-        <h2>Arma el rompecabezas</h2>
-        <p>Arrastra las piezas para completar la imagen</p>
-        <canvas id="puzzle" width="400" height="400"></canvas>
-        <button onclick="checkPuzzle()">Completado</button>
-    </div>
+    <div id="game-container" style="display: none;">
+        <div id="puzzle-container">
+            <h2>Arma el rompecabezas</h2>
+            <p>Arrastra las piezas para completar la imagen</p>
+            <canvas id="puzzle" width="400" height="400"></canvas>
+            <button onclick="checkPuzzle()">Completado</button>
+        </div>
 
-    <div id="riddle-container">
-        <h2>¿Cuál es el nombre de la gatita de Fani?</h2>
-        <input type="text" id="riddle-answer" placeholder="Escribe aquí">
-        <button onclick="checkRiddle()">Responder</button>
-        <p id="riddle-feedback"></p>
-    </div>
+        <div id="riddle-container">
+            <h2>¿Cuál es el nombre de la gatita de Fani?</h2>
+            <input type="text" id="riddle-answer" placeholder="Escribe aquí">
+            <button onclick="checkRiddle()">Responder</button>
+            <p id="riddle-feedback"></p>
+        </div>
 
-    <div id="question-container">
-        <h2>¿Qué es lo que más le dice Jonathan a Fani?</h2>
-        <input type="text" id="question-answer" placeholder="Escribe aquí">
-        <button onclick="checkQuestion()">Responder</button>
-        <p id="question-feedback"></p>
-    </div>
+        <div id="question-container">
+            <h2>¿Qué es lo que más le dice Jonathan a Fani? "Sin mayusculas"</h2>
+            <input type="text" id="question-answer" placeholder="Escribe aquí">
+            <button onclick="checkQuestion()">Responder</button>
+            <p id="question-feedback"></p>
+        </div>
 
-    <div id="final-message">
-        <h2>25/03/2025</h2>
+        <div id="final-message">
+            <h2>25/03/2025</h2>
+        </div>
     </div>
 
     <script>
-        function startPuzzle() {
+        function startGame() {
             document.getElementById('start-container').style.display = 'none';
-            document.getElementById('puzzle-container').style.display = 'block';
-            // Aquí iría la lógica del rompecabezas
+            document.getElementById('game-container').style.display = 'block';
         }
 
         function checkPuzzle() {
