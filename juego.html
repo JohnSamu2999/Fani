@@ -6,12 +6,35 @@
     <title>Juego para Fani</title>
     <style>
         body {
-            text-align: center;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: #fff8dc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
-        #riddle-container, #question-container, #date-container, #final-message {
-            display: none;
+        .flower {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+        .flower img {
+            width: 100%;
+            height: 100%;
+        }
+        #game-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            font-family: Arial, sans-serif;
         }
         button {
             margin-top: 20px;
@@ -23,7 +46,7 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 10;
+            z-index: 20;
         }
         nav a {
             text-decoration: none;
@@ -40,8 +63,8 @@
         <a href="juego.html">Jueguito</a>
     </nav>
     
-    <h1>Bienvenida Fani</h1>
     <div id="start-container">
+        <h1>Bienvenida Fani</h1>
         <p>Haz clic en el botón para comenzar el juego.</p>
         <button onclick="startGame()">Comenzar</button>
     </div>
@@ -55,7 +78,7 @@
             <p id="date-feedback"></p>
         </div>
 
-        <div id="riddle-container">
+        <div id="riddle-container" style="display: none;">
             <h2>Segunda pregunta</h2>
             <p>¿Cuál es el nombre de la gatita de Fani?</p>
             <input type="text" id="riddle-answer" placeholder="Escribe aquí">
@@ -63,7 +86,7 @@
             <p id="riddle-feedback"></p>
         </div>
 
-        <div id="question-container">
+        <div id="question-container" style="display: none;">
             <h2>Tercera pregunta</h2>
             <p>¿Qué es lo que más le dice Jonathan a Fani?</p>
             <input type="text" id="question-answer" placeholder="Escribe aquí">
@@ -71,13 +94,32 @@
             <p id="question-feedback"></p>
         </div>
 
-        <div id="final-message">
+        <div id="final-message" style="display: none;">
             <h1>Próximamente...</h1>
             <p>25/03/25</p>
         </div>
     </div>
 
     <script>
+        function createFlowers() {
+            const images = ["florecita.gif", "roja.gif"];
+            const totalFlowers = Math.floor(window.innerWidth * window.innerHeight / 2000);
+
+            for (let i = 0; i < totalFlowers; i++) {
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+                flower.style.left = Math.random() * (window.innerWidth - 50) + "px";
+                flower.style.top = Math.random() * (window.innerHeight - 50) + "px";
+                
+                let img = document.createElement("img");
+                img.src = images[Math.floor(Math.random() * images.length)];
+                img.alt = "Flor";
+                
+                flower.appendChild(img);
+                document.body.appendChild(flower);
+            }
+        }
+
         function startGame() {
             document.getElementById('start-container').style.display = 'none';
             document.getElementById('game-container').style.display = 'block';
@@ -116,7 +158,8 @@
                 document.getElementById('question-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
             }
         }
+
+        window.onload = createFlowers;
     </script>
 </body>
 </html>
-
