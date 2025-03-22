@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fffbe6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .flower {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Orange_flower_icon.svg/1024px-Orange_flower_icon.svg.png');
+            background-size: cover;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        .message {
+            position: absolute;
+            text-align: center;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            color: #d4a017;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #d4a017;
+            font-size: 20px;
+            margin-right: 15px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Jueguito</a>
+    </nav>
+    <div class="message">Aquí va tu mensaje especial</div>
+    <script>
+        function createFlowers() {
+            for (let i = 0; i < 50; i++) {
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+                flower.style.left = Math.random() * window.innerWidth + "px";
+                flower.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                document.body.appendChild(flower);
+            }
+        }
+        createFlowers();
+    </script>
+</body>
+</html>
