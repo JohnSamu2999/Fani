@@ -84,7 +84,6 @@
     <!-- Música de fondo -->
     <audio id="background-music" loop autoplay>
         <source src="musica.mp3" type="audio/mp3">
-        Tu navegador no soporta la etiqueta de audio.
     </audio>
 
     <nav>
@@ -158,7 +157,7 @@
         function checkDate() {
             let answer = document.getElementById('date-answer').value.trim();
             if (answer === '25/12/2024') {
-                alert('Jonathan dice');
+                alert('25');
                 document.getElementById('date-container').style.display = 'none';
                 document.getElementById('riddle-container').style.display = 'block';
             } else {
@@ -169,7 +168,7 @@
         function checkRiddle() {
             let answer = document.getElementById('riddle-answer').value.trim();
             if (answer.toLowerCase() === 'kira') {
-                alert('Jonathan dice');
+                alert('03');
                 document.getElementById('riddle-container').style.display = 'none';
                 document.getElementById('question-container').style.display = 'block';
             } else {
@@ -180,7 +179,7 @@
         function checkQuestion() {
             let answer = document.getElementById('question-answer').value.trim();
             if (answer === 'me caes mal') {
-                alert('Jonathan dice');
+                alert('2025');
                 document.getElementById('question-container').style.display = 'none';
                 document.getElementById('final-message').style.display = 'block';
             } else {
