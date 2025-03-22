@@ -59,14 +59,19 @@
     <div class="message">Aquí va tu mensaje especial</div>
     <script>
         function createFlowers() {
-            for (let i = 0; i < 50; i++) {
+            const images = ["florecita.gif", "roja.gif"]; 
+            const totalFlowers = Math.floor(window.innerWidth * window.innerHeight / 2000); 
+
+            for (let i = 0; i < totalFlowers; i++) {
                 let flower = document.createElement("div");
                 flower.classList.add("flower");
                 flower.style.left = Math.random() * (window.innerWidth - 50) + "px";
                 flower.style.top = Math.random() * (window.innerHeight - 50) + "px";
+                
                 let img = document.createElement("img");
-                img.src = "florecita.gif"; // Asegúrate de que el archivo esté en la misma carpeta
-                img.alt = "Florecita";
+                img.src = images[Math.floor(Math.random() * images.length)]; 
+                img.alt = "Flor";
+                
                 flower.appendChild(img);
                 document.body.appendChild(flower);
             }
