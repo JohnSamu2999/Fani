@@ -52,6 +52,7 @@
             background-color: #ffcc00;
             color: #333;
             font-weight: bold;
+            z-index: 20;
         }
         button:hover {
             background-color: #ffaa00;
@@ -94,7 +95,7 @@
     <div id="game-container" style="display: none;">
         <div id="date-container">
             <h2>Primera pregunta</h2>
-            <p>¿En qué día Fani y Jonathan empezaron a hablar más? "Formato: dd/mm/aaaa"</p>
+            <p>¿En qué día Fani y Jonathan empezaron a hablar más? "Escribe asi: dd/mm/aaaa"</p>
             <input type="text" id="date-answer" placeholder="Escribe aquí">
             <button onclick="checkDate()">Responder</button>
             <p id="date-feedback"></p>
@@ -102,7 +103,7 @@
 
         <div id="riddle-container" style="display: none;">
             <h2>Segunda pregunta</h2>
-            <p>¿Cuál es el nombre de la gatita de Fani?</p>
+            <p>¿Cuál es el nombre de la gatita de Fani? "Primera mayuscula"</p>
             <input type="text" id="riddle-answer" placeholder="Escribe aquí">
             <button onclick="checkRiddle()">Responder</button>
             <p id="riddle-feedback"></p>
@@ -110,7 +111,7 @@
 
         <div id="question-container" style="display: none;">
             <h2>Tercera pregunta</h2>
-            <p>¿Qué es lo que más le dice Jonathan a Fani?</p>
+            <p>¿Qué es lo que más le dice Jonathan a Fani? "Todo minusculas"</p>
             <input type="text" id="question-answer" placeholder="Escribe aquí">
             <button onclick="checkQuestion()">Responder</button>
             <p id="question-feedback"></p>
