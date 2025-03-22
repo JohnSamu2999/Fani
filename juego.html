@@ -32,6 +32,9 @@
             margin-right: 15px;
             font-family: Arial, sans-serif;
         }
+        canvas {
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +53,7 @@
         <div id="puzzle-container">
             <h2>Arma el rompecabezas</h2>
             <p>Arrastra las piezas para completar la imagen</p>
-            <canvas id="puzzle.jpg" width="400" height="400"></canvas>
+            <canvas id="puzzle-canvas" width="400" height="400"></canvas>
             <button onclick="checkPuzzle()">Completado</button>
         </div>
 
@@ -74,15 +77,67 @@
     </div>
 
     <script>
-        function startGame() {
-            document.getElementById('start-container').style.display = 'none';
-            document.getElementById('game-container').style.display = 'block';
+        let canvas = document.getElementById('puzzle-canvas');
+        let ctx = canvas.getContext('2d');
+        let img = new Image();
+        let pieces = [];
+        let rows = 3, cols = 3; // Dividimos el rompecabezas en 3x3
+        let pieceWidth, pieceHeight;
+
+        img.src = 'puzzle.jpg';
+        img.onload = function() {
+            pieceWidth = img.width / cols;
+            pieceHeight = img.height / rows;
+
+            // Mezclamos las piezas
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    pieces.push({ x, y });
+                }
+            }
+            pieces = pieces.sort(() => Math.random() - 0.5);
+
+            drawPuzzle();
+        };
+
+        img.onerror = function() {
+            alert('Error: No se pudo cargar la imagen del rompecabezas.');
+        };
+
+        function drawPuzzle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pieces.forEach((piece, index) => {
+                let sx = piece.x * pieceWidth;
+                let sy = piece.y * pieceHeight;
+                let dx = (index % cols) * pieceWidth;
+                let dy = Math.floor(index / cols) * pieceHeight;
+
+                ctx.drawImage(img, sx, sy, pieceWidth, pieceHeight, dx, dy, pieceWidth, pieceHeight);
+            });
         }
 
         function checkPuzzle() {
-            document.getElementById('puzzle-container').style.display = 'none';
-            alert('25');
-            document.getElementById('riddle-container').style.display = 'block';
+            let correct = true;
+            pieces.forEach((piece, index) => {
+                let expectedX = index % cols;
+                let expectedY = Math.floor(index / cols);
+                if (piece.x !== expectedX || piece.y !== expectedY) {
+                    correct = false;
+                }
+            });
+
+            if (correct) {
+                alert('25');
+                document.getElementById('puzzle-container').style.display = 'none';
+                document.getElementById('riddle-container').style.display = 'block';
+            } else {
+                alert('El rompecabezas aún no está completo. Sigue intentándolo.');
+            }
+        }
+
+        function startGame() {
+            document.getElementById('start-container').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
         }
 
         function checkRiddle() {
