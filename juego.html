@@ -3,201 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego para Fani</title>
+    <title>Juego de Cartas</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: #fff8dc;
+            background-color: #add8e6; /* Fondo azul clarito */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+        .card {
+            width: 100px;
+            height: 150px;
+            background-color: white;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            height: 100vh;
-        }
-        .flower {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-        }
-        .flower img {
-            width: 100%;
-            height: 100%;
-        }
-        #game-container {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 90%;
-            max-height: 80%;
-            overflow-y: auto;
-            font-family: Arial, sans-serif;
-        }
-        h1, h2, p {
-            margin: 10px 0;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #ffcc00;
-            color: #333;
+            font-size: 18px;
+            color: black;
             font-weight: bold;
-            z-index: 20;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        button:hover {
-            background-color: #ffaa00;
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card.open {
+            background-color: #ffefd5; /* Fondo de carta abierta */
+            color: black;
         }
         nav {
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 20;
+            z-index: 10;
         }
         nav a {
             text-decoration: none;
-            color: black;
+            color: black; /* Enlaces en negro */
             font-size: 20px;
             margin-right: 15px;
-            font-family: Arial, sans-serif;
-        }
-        input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        /* Contenedor para la pantalla de inicio y el botón de comenzar */
-        #start-container {
-            z-index: 100;
-            position: relative;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
-    <!-- Música de fondo -->
-    <audio id="background-music" loop autoplay>
-        <source src="musica.mp3" type="audio/mp3">
-    </audio>
-
     <nav>
         <a href="index.html">Inicio</a>
-        <a href="juego.html">Jueguito</a>
     </nav>
-    
-    <div id="start-container">
-        <h1>Bienvenida Fani</h1>
-        <p>Haz clic en el botón para comenzar el juego.</p>
-        <button onclick="startGame()">Comenzar</button>
+    <h1>Cartas de Cariño</h1>
+    <div class="cards-container" id="cards-container">
+        <!-- Las cartas se generarán dinámicamente -->
     </div>
-
-    <div id="game-container" style="display: none;">
-        <div id="date-container">
-            <h2>Primera pregunta</h2>
-            <p>¿En qué día Fani y Jonathan empezaron a hablar más? "Escribe asi: dd/mm/aaaa"</p>
-            <input type="text" id="date-answer" placeholder="Escribe aquí">
-            <button onclick="checkDate()">Responder</button>
-            <p id="date-feedback"></p>
-        </div>
-
-        <div id="riddle-container" style="display: none;">
-            <h2>Segunda pregunta</h2>
-            <p>¿Cuál es el nombre de la gatita de Fani? "Primera mayuscula"</p>
-            <input type="text" id="riddle-answer" placeholder="Escribe aquí">
-            <button onclick="checkRiddle()">Responder</button>
-            <p id="riddle-feedback"></p>
-        </div>
-
-        <div id="question-container" style="display: none;">
-            <h2>Tercera pregunta</h2>
-            <p>¿Qué es lo que más le dice Jonathan a Fani? "Todo minusculas"</p>
-            <input type="text" id="question-answer" placeholder="Escribe aquí">
-            <button onclick="checkQuestion()">Responder</button>
-            <p id="question-feedback"></p>
-        </div>
-
-        <div id="final-message" style="display: none;">
-            <h1>Próximamente...</h1>
-            <p>25/03/25</p>
-        </div>
-    </div>
-
     <script>
-        function createFlowers() {
-            const images = ["florecita.gif", "roja.gif"];
-            const totalFlowers = Math.floor(window.innerWidth * window.innerHeight / 2000);
+        const messages = [
+            "¡Te quiero mucho!", 
+            "Eres muy especial.", 
+            "Gracias por ser tú.", 
+            "Tienes un gran corazón.", 
+            "Eres mi persona favorita.", 
+            "¡Feliz día de las flores amarillas!", 
+            "Siempre me haces sonreír.", 
+            "Eres un regalo para este mundo.", 
+            "Me encanta estar contigo.", 
+            "Nunca dejes de brillar.", 
+            "Te admiro muchísimo.", 
+            "Eres un ejemplo a seguir.", 
+            "Espero siempre verte feliz.", 
+            "Gracias por tus abrazos.", 
+            "Eres una inspiración.", 
+            "Siempre cuentas conmigo.", 
+            "¡Qué suerte tenerte cerca!", 
+            "Eres increíblemente especial.", 
+            "Tu sonrisa ilumina mi día.", 
+            "Te aprecio más de lo que imaginas.", 
+            "Tienes una energía única.", 
+            "Gracias por tus risas.", 
+            "Siempre pienso en ti.", 
+            "¡Eres lo mejor que me ha pasado!"
+        ];
 
-            for (let i = 0; i < totalFlowers; i++) {
-                let flower = document.createElement("div");
-                flower.classList.add("flower");
-                flower.style.left = Math.random() * (window.innerWidth - 50) + "px";
-                flower.style.top = Math.random() * (window.innerHeight - 50) + "px";
-                
-                let img = document.createElement("img");
-                img.src = images[Math.floor(Math.random() * images.length)];
-                img.alt = "Flor";
-                
-                flower.appendChild(img);
-                document.body.appendChild(flower);
+        function createCards() {
+            const container = document.getElementById('cards-container');
+
+            for (let i = 1; i <= 24; i++) {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.textContent = i; // Número de carta
+                card.addEventListener('click', () => {
+                    if (!card.classList.contains('open')) {
+                        card.classList.add('open');
+                        card.textContent = messages[i - 1]; // Mensaje de la carta
+                    }
+                });
+                container.appendChild(card);
             }
         }
 
-        function startGame() {
-            document.getElementById('start-container').style.display = 'none';
-            document.getElementById('game-container').style.display = 'block';
-            document.getElementById('date-container').style.display = 'block';
-        }
-
-        function checkDate() {
-            let answer = document.getElementById('date-answer').value.trim();
-            if (answer === '25/12/2024') {
-                alert('25');
-                document.getElementById('date-container').style.display = 'none';
-                document.getElementById('riddle-container').style.display = 'block';
-            } else {
-                document.getElementById('date-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
-            }
-        }
-
-        function checkRiddle() {
-            let answer = document.getElementById('riddle-answer').value.trim();
-            if (answer.toLowerCase() === 'kira') {
-                alert('03');
-                document.getElementById('riddle-container').style.display = 'none';
-                document.getElementById('question-container').style.display = 'block';
-            } else {
-                document.getElementById('riddle-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
-            }
-        }
-
-        function checkQuestion() {
-            let answer = document.getElementById('question-answer').value.trim();
-            if (answer === 'me caes mal') {
-                alert('2025');
-                document.getElementById('question-container').style.display = 'none';
-                document.getElementById('final-message').style.display = 'block';
-            } else {
-                document.getElementById('question-feedback').innerText = 'Respuesta incorrecta, intenta de nuevo.';
-            }
-        }
-
-        window.onload = createFlowers;
+        window.onload = createCards;
     </script>
 </body>
 </html>
+
