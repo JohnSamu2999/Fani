@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de Cartas</title>
+    <title>Cartitas</title>
     <style>
         body {
             margin: 0;
@@ -16,41 +16,40 @@
             height: 100vh;
             font-family: Arial, sans-serif;
             position: relative;
-            overflow: hidden;
         }
         .cards-container {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             padding: 20px;
+            max-width: 80%;
         }
         .card {
-            width: 100px;
-            height: 150px;
+            width: 100%;
+            height: auto;
             background-color: white;
             border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 15px;
+            text-align: center;
             font-size: 18px;
             color: black;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: background-color 0.3s;
+            border: 2px solid #000;
         }
         .card:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #ffefd5; /* Fondo de carta al pasar el mouse */
         }
         .card.open {
             background-color: #ffefd5; /* Fondo de carta abierta */
             color: black;
+            cursor: default;
         }
         nav {
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 10;
         }
         nav a {
             text-decoration: none;
@@ -70,30 +69,30 @@
     </div>
     <script>
         const messages = [
-            "Feliz cumpleaños a la niña mas loquita que conozco, y eso que la niña tenia cara de ser seria, de portarse bien aplicada, pero solo estaba algo loquita, JAJAJAJ es bromita, me gusta tu manera de ser aunque estes loca, agradezco por tenerte en mi vida", 
-            "Eres muy especial.", 
-            "Gracias por ser tú.", 
-            "Tienes un gran corazón.", 
-            "Eres mi persona favorita.", 
-            "¡Feliz día de las flores amarillas!", 
-            "Siempre me haces sonreír.", 
-            "Eres un regalo para este mundo.", 
-            "Me encanta estar contigo.", 
-            "Nunca dejes de brillar.", 
-            "Te admiro muchísimo.", 
-            "Eres un ejemplo a seguir.", 
-            "Espero siempre verte feliz.", 
-            "Gracias por tus abrazos.", 
-            "Eres una inspiración.", 
-            "Siempre cuentas conmigo.", 
-            "¡Qué suerte tenerte cerca!", 
-            "Eres increíblemente especial.", 
-            "Tu sonrisa ilumina mi día.", 
-            "Te aprecio más de lo que imaginas.", 
-            "Tienes una energía única.", 
-            "Gracias por tus risas.", 
-            "Siempre pienso en ti.", 
-            "¡Eres lo mejor que me ha pasado!"
+            "Carta 1: Hoy quiero recordarte lo especial que eres para mí, cada momento contigo es inolvidable, talvez es uno de tus hechizos y agradezco la suerte de tenerte en mi vida",
+            "Carta 2: A veces, la vida nos regala personas que iluminan nuestros días, ahora tu eres una de esas personas para mí. gracias por existir un año mas y por compartir tanto conmigo",
+            "Carta 3: Quiero que sepas que te admiro por tu fuerza, tu sonrisa, y todo lo que haces que insipira a cualquier personas a ser mejor ¡Eres increíble! Bruja fea",
+            "Carta 4: Si pudiera, te diria como ayudas a todos, todos los dias eres esa luz que hace todo mejor espero que siempre recuerdes eso.",
+            "Carta 5: Encontrarte a ti fue el regalo más bonito tus forma de ser, tus gestos, y tu personalidad son algo que me soprende todos los dias mas.",
+            "Carta 6: Quiero que sepas que siempre voy a estar aquí, pase lo que pase, tu felicidad es importante para mí, y haré todo lo posible por verte feliz.",
+            "Carta 7: Eres parte de mi vida ahora y cada recuerdo contigo es un tesoro que guardo con mucho cariño, gracias por ser como eres.",
+            "Carta 8: Sé que las palabras nunca serán suficientes para describir lo grande que eres, pero quiero que sepas que eres una persona muy grande para cualquiera y llena de cosas hermosas.",
+            "Carta 9: Queiro recordarte que siempre puedes contar conmigo, en los días felices, en los difíciles, siempre estaré contigo, si no me pegas claro JAJAJAJ.",
+            "Carta 10: A veces me detengo a pensar en lo afortunado que soy de tenerte enb mi vida, la vida es mas divertida contigo en ella.",
+            "Carta 11: Espero que nunca dejes de soñar y de buscar lo que te hace feliz, yo estare aqui para apoyarte en cada paso que des.",
+            "Carta 12: Cada día contigo yo aprendo, y soy mejor, gracias por todo lo que me enseñas, incluso sin darte cuenta.",
+            "Carta 13: Hay tantas cosas que me gustaría agradecerte, pero principalmente gracias por ser tú, con tus virtudes, tus risas, y todo lo que te hace especial, ya acumule mi deuda de 1 miloon de quetzales JAJAJA.",
+            "Carta 14: No importa cuántas veces lo diga, nunca será suficiente ¡Eres increíble! Espero que siempre recuerdes eso.",
+            "Carta 15: Hay días en los que solo quiero recordarte lo fuerte y valiente que eres hoy es el dia perfecto ¡Te quiero muto!",
+            "Carta 16: Aveces hay altos y bajos pero tu sabes siempre como brillar apesar de ellos, gracias por ser ese rayito de luz en la tormenta.",
+            "Carta 17: Me caes Mal <3 Viejaaaa.",
+            "Carta 18: Eres un regalo para este mundoy hoy fue cuando el mundo nos lo dio gracias por ser tan locamente y brujamente tú.",
+            "Carta 19: Cuando estoy algo desanimado, se que hablar contigo del tema que sea, se que me hara sonreir y me hara feliz y eso te define perfectamente como persona.",
+            "Carta 20: Solo quiero recordarte que quiero robarme a Kira y no tienes nada que hacer, yo se que ella me quiere. JAJAJ ",
+            "Carta 21: Nunca olvides lo fuerte que eres. Siempre que lo necesites, recuerda que tienes a alguien que cree en ti.",
+            "Carta 22: Solo quiero decirte gracias por todas las cosas lindas que haces por los demas auque no estes al 100% siempre te preocupas por los demas auque no te deuvelvan el favor, mereces mas <3.",
+            "Carta 23: El mundo esta celebrando que tiene un año mas a una persona que aporta tanto y que da tanto, que es increible saber que existes.",
+            "Carta 24: Quiero declarar que todo lo que dije no puede ser usado en mi contra, que ando loquito, que esto lo hice a lo loquito, que me caes mal, y que todo lo que dije es verdad, Te quiero mucho Brujita <3."
         ];
 
         function createCards() {
@@ -102,11 +101,11 @@
             for (let i = 1; i <= 24; i++) {
                 const card = document.createElement('div');
                 card.classList.add('card');
-                card.textContent = i; // Número de carta
+                card.textContent = `Carta ${i}`; // Número de carta inicial
                 card.addEventListener('click', () => {
                     if (!card.classList.contains('open')) {
                         card.classList.add('open');
-                        card.textContent = messages[i - 1]; // Mensaje de la carta
+                        card.textContent = messages[i - 1]; // Mensaje largo de la carta
                     }
                 });
                 container.appendChild(card);
@@ -117,4 +116,3 @@
     </script>
 </body>
 </html>
-
