@@ -14,16 +14,31 @@
             align-items: center;
             height: 100vh;
             position: relative;
-            flex-direction: column;
             font-family: Arial, sans-serif;
+        }
+        nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+        nav a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            margin-right: 15px;
+            font-family: Arial, sans-serif;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
         .hidden {
             display: none;
         }
         .card {
             background-color: #fff;
-            width: 400px; /* Ampliamos el ancho */
-            height: 300px; /* Ampliamos la altura */
+            width: 500px;
+            height: 400px;
             border: 2px solid #f1c40f;
             border-radius: 10px;
             display: flex;
@@ -32,30 +47,24 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
-            padding: 20px; /* Añadimos padding para espaciar el texto */
-            overflow: hidden;
+            padding: 20px;
+            position: relative;
+            transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease;
         }
-        .card button {
-            background-color: #f1c40f;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .card button:hover {
-            background-color: #e67e22;
+        .card.open {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            box-shadow: none;
         }
         .message {
-            padding: 10px; /* Reducimos el padding interno del mensaje */
-            font-size: 16px;
+            font-size: 18px;
             color: #333;
-            line-height: 1.5; /* Espaciado entre líneas */
-            overflow-y: auto; /* Agregamos scroll si el texto es demasiado largo */
-            max-height: 100%; /* Aseguramos que no sobrepase el contenedor */
+            line-height: 1.8;
             display: none;
+        }
+        .card.open .message {
+            display: block;
         }
         input[type="text"] {
             padding: 10px;
@@ -65,20 +74,25 @@
             margin-bottom: 10px;
         }
         button {
-            background-color: #3498db;
+            background-color: #f1c40f;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
         button:hover {
-            background-color: #2980b9;
+            background-color: #e67e22;
         }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html">Inicio</a>
+    </nav>
+
     <div id="auth-section">
         <h2>Ingresa el código secreto para acceder:</h2>
         <input type="text" id="code-input" placeholder="Ingresa el código aquí">
@@ -87,17 +101,22 @@
     </div>
 
     <div id="content-section" class="hidden">
-        <div class="card">
+        <div class="card" id="card">
             <h3>¡Sorpresa!</h3>
             <p>Haz clic en el botón para abrir la carta:</p>
-            <button onclick="showMessage()">Abrir Carta</button>
+            <button onclick="openCard()">Abrir Carta</button>
             <div class="message" id="secret-message">
-                ¡Felicidades Brujita! 🎉 <br><br>
+                <h2>¡Felicidades Brujita! 🎉</h2>
+                <p>
                 La sorpresa final es, que quiero invitarte a salir, ya te lo habia dicho de antes, pero me parecio una forma mas bonita y linda de hacerlo asi, se que en estos dias no podras por obvis razones<br><br>
                Pero no es para ahora AJAJAJ, es casi casi hasta dentro de un mes, me preguntaras porque?<br>
                 1. Me gusta molestarte 2.Estoy a una semana de mi viaje y casi toda la semana estare muy ocupado, 3. tendras tiempo para decidir, ya que tu decidiras a donde ir y que hacer <br>
                 Se que falta mucho, y lo lamento, pero no quisiera hacer las cosas corriendo contigo, quiero disfrutarlo, y si no llegas a pensar en nada, solo dime y buscamos algo juntos <br>
                 Te quiero muchisisisisisisisimo Brujita att:Js<br>
+                </p>
+                <p>
+                    Me voy a robar a Kira, para que estes con cuidado JAJAJAJ
+                </p>
             </div>
         </div>
     </div>
@@ -117,11 +136,12 @@
             }
         }
 
-        function showMessage() {
+        function openCard() {
+            const card = document.getElementById("card");
             const message = document.getElementById("secret-message");
+            card.classList.add("open");
             message.style.display = "block";
         }
     </script>
 </body>
 </html>
-
