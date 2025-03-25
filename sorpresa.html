@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorpresa Final</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #add8e6; /* Fondo azul clarito */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+        .card {
+            background-color: #fff;
+            width: 300px;
+            height: 200px;
+            border: 2px solid #f1c40f;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .card button {
+            background-color: #f1c40f;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .card button:hover {
+            background-color: #e67e22;
+        }
+        .message {
+            padding: 20px;
+            font-size: 18px;
+            color: #333;
+            display: none;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div id="auth-section">
+        <h2>Ingresa el código secreto para acceder:</h2>
+        <input type="text" id="code-input" placeholder="Ingresa el código aquí">
+        <button onclick="verifyCode()">Ingresar</button>
+        <p id="error-message" style="color: red; display: none;">¡Código incorrecto! Intenta nuevamente.</p>
+    </div>
+
+    <div id="content-section" class="hidden">
+        <div class="card">
+            <h3>¡Sorpresa!</h3>
+            <p>Haz clic en el botón para abrir la carta:</p>
+            <button onclick="showMessage()">Abrir Carta</button>
+            <div class="message" id="secret-message">
+                ¡Felicidades, Fani! 🎉 <br><br>
+                Esta es tu sorpresa final. Solo quería recordarte lo especial que eres y cuánto te quiero. Espero que este día haya sido inolvidable para ti, lleno de amor, alegría y risas. Nunca olvides lo importante que eres para mí y para todos los que te rodean. 💛 <br><br>
+                ¡Feliz cumpleaños nuevamente! Eres increíble, y espero que este año esté lleno de grandes sorpresas y bendiciones. 🌟
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function verifyCode() {
+            const input = document.getElementById("code-input").value;
+            const errorMessage = document.getElementById("error-message");
+            const authSection = document.getElementById("auth-section");
+            const contentSection = document.getElementById("content-section");
+
+            if (input === "250325") {
+                authSection.classList.add("hidden");
+                contentSection.classList.remove("hidden");
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+
+        function showMessage() {
+            const message = document.getElementById("secret-message");
+            message.style.display = "block";
+        }
+    </script>
+</body>
+</html>
