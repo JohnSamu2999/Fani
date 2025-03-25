@@ -22,8 +22,8 @@
         }
         .card {
             background-color: #fff;
-            width: 300px;
-            height: 200px;
+            width: 400px; /* Ampliamos el ancho */
+            height: 300px; /* Ampliamos la altura */
             border: 2px solid #f1c40f;
             border-radius: 10px;
             display: flex;
@@ -32,6 +32,8 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
+            padding: 20px; /* Añadimos padding para espaciar el texto */
+            overflow: hidden;
         }
         .card button {
             background-color: #f1c40f;
@@ -47,9 +49,12 @@
             background-color: #e67e22;
         }
         .message {
-            padding: 20px;
-            font-size: 18px;
+            padding: 10px; /* Reducimos el padding interno del mensaje */
+            font-size: 16px;
             color: #333;
+            line-height: 1.5; /* Espaciado entre líneas */
+            overflow-y: auto; /* Agregamos scroll si el texto es demasiado largo */
+            max-height: 100%; /* Aseguramos que no sobrepase el contenedor */
             display: none;
         }
         input[type="text"] {
@@ -116,3 +121,4 @@
     </script>
 </body>
 </html>
+
